@@ -1,0 +1,27 @@
+
+{%extends "E:\Projects\practice\mainfile\invoices\templates\invoices\base.html"  %}
+
+{% block content %}
+
+    <h1>All Invoices</h1>
+
+    {% for invoice in all_invoices %}
+      
+      {% if invoice.amount >= 6000%}
+      <p>
+           
+        Invoice: {{ invoice.number }}
+        - {{invoice.customer|upper}}
+        - {{ invoice.amount }}
+        
+      </p>
+      
+      {%endif%}
+
+       
+
+    {% endfor %}
+    
+    
+
+{% endblock %}
