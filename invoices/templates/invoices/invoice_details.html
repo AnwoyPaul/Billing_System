@@ -1,0 +1,14 @@
+{% extends "invoices/base.html" %}
+{% block title %}Invoice {{ invoice.invoicenum }} | Billing system{% endblock %}
+
+{% block content %}
+  <h1>Invoice {{ invoice.invoicenum }}</h1>
+  <dl>
+    <dt>Customer name</dt><dd>{{ invoice.cname }}</dd>
+    <dt>Company name</dt><dd>{{ invoice.companyn }}</dd>
+    <dt>Amount</dt><dd>{{ invoice.amount }}</dd>
+    <dt>Date created</dt><dd>{{ invoice.date_created }}</dd>
+    <dt>Status</dt><dd>{{ invoice.paid|yesno:"Paid,Unpaid" }}</dd>
+    <dt>Note</dt><dd>{{ invoice.note|default:"—"|linebreaksbr }}</dd>
+  </dl>
+{% endblock %}

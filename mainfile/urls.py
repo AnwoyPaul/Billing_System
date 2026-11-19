@@ -20,6 +20,5 @@ from invoices import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path('cust/', views.show_invoices, name='Customer-name'),
+path("", include("invoices.urls")),
 ]

@@ -24,8 +24,40 @@ from django.http import HttpResponse
 #   }
 #   return render(request,"templates/invoices_list",data)
 
-
+# Create New Record
 from django.shortcuts import render
+from .models import Invoice
+def create_invoice(request):
+    Invoice.objects.create (
+        cname='Likhon',
+        invoicenum='AP=001',
+        amount=15000,
+        paid=False
+    
+        )
+    return render(request,'invoices/invoice_list.html',{})
+# Ferch
+def show_one_invoice(request):
+    invoice=Invoice.objects.get(invoicenum='AP=001')
+    return render(request,'invoices/invoice_details.html',{})
+
+# Filter Method
+def show_unpaid_invoices(request):
+    unpaid_invoices=Invoice.objects.filter(paid=False)
+    data= {
+        'unpaid_invoices':unpaid_invoices
+    }
+    return render(request,'invoices/invoice_list.html',data)
+# Update
+def mark_as_paid(request):
+    Invoice.objects.filter(invoicenum='AP=001').update(paid=True)
+
+    allin= Invoice.objects.filter(paid=False)
+    data={
+        'allin':allin
+    }
+    return render(request,'invoices/invoice_list.html',{data})
+
 
 def show_invoices(request):
 

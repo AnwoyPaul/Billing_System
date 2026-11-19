@@ -1,27 +1,18 @@
-
-{%extends "E:\Projects\practice\mainfile\invoices\templates\invoices\base.html"  %}
+{% extends "invoices/base.html" %}
+{% block title %}Customers | Billing system{% endblock %}
 
 {% block content %}
-
-    <h1>All Invoices</h1>
-
-    {% for invoice in all_invoices %}
-      
-      {% if invoice.amount >= 6000%}
-      <p>
-           
-        Invoice: {{ invoice.number }}
-        - {{invoice.customer|upper}}
-        - {{ invoice.amount }}
-        
-      </p>
-      
-      {%endif%}
-
-       
-
+  <h1>Customers with invoices of 6,000 or more</h1>
+  <ul>
+    {% for invoice in invoices %}
+      <li>
+        {{ invoice.cname|upper }} —
+        <a href="{% url 'invoice_detail' invoice.pk %}">{{ invoice.invoicenum }}</a>
+        — {{ invoice.amount }}
+      </li>
+    {% empty %}
+      <li>No matching invoices.</li>
     {% endfor %}
-    
-    
-
+  </ul>
+  
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends "invoices/base.html" %}
+{% block title %}{{ heading }} | Billing system{% endblock %}
+
+{% block content %}
+  <h1>{{ heading }}</h1>
+  <ul>
+    {% for invoice in invoices %}
+      <li>
+        <a href="{% url 'invoice_detail' invoice.pk %}">{{ invoice.invoicenum }}</a>
+        — {{ invoice.cname }} — {{ invoice.amount }} — {{ invoice.paid|yesno:"Paid,Unpaid" }}
+      </li>
+    {% empty %}
+      <li>No invoices to show.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

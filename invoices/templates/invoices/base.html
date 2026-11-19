@@ -1,23 +1,21 @@
-<html>
-  <head>
-    <title>
-      Navigation Details
-    </title>
-  </head>
-  <body>
-    <nav>
-      <a href="/home/">home</a>
-      <a href="/invoices/"> Invoices</a>
-      <a href="/cust/">Customers</a>
-    </nav>
-    {%block content%}
-    {%endblock%}
-    <footer>
-      <p>
-        Billing System. Saved
-      </p>
-    </footer>
-
-  </body>
-
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Billing system{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'invoices/style.css' %}">
+</head>
+<body>
+  <nav>
+    <a href="{% url 'all_invoices' %}">All invoices</a>
+    <a href="{% url 'invoice_list' %}">Unpaid invoices</a>
+    <a href="{% url 'Customer-name' %}">Customers</a>
+    {% if user.is_staff and perms.invoices.add_invoice %}
+      <a href="{% url 'admin:invoices_invoice_add' %}">Add invoice</a>
+    {% endif %}
+  </nav>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>Billing system</footer>
+</body>
 </html>
